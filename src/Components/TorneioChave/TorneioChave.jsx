@@ -149,7 +149,7 @@ export default function TorneioChave({ torneio, onBracketReset }) {
                                     // Se for o round do campeão, renderiza este bloco especial
                                     return (
                                         <div className={`${style.match} ${style.champion}`} key={match.id}>
-                                            <div className={style.championTitle}>🏆 CAMPEÃO 🏆</div>
+                                            <div className={style.championTitle}>CAMPEÃO</div>
                                             <div className={style.championName}>{match.player1 || 'A definir'}</div>
                                         </div>
                                     );

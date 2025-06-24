@@ -41,6 +41,14 @@ export default function DetalhesTorneio() {
     </>
   }
 
+  function formatarData(dataString) {
+      if (!dataString || typeof dataString !== 'string') return 'Data inválida';
+      const partes = dataString.split('-');
+      if (partes.length !== 3) return dataString;
+      const [ano, mes, dia] = partes;
+      return `${dia}/${mes}/${ano}`;
+    }
+
   return (
     <>
       <NavBarHome />
@@ -53,7 +61,7 @@ export default function DetalhesTorneio() {
         <div className={style.container_botao_data}>
           <div className={style.container_data}>
             <h4>{torneio.titulo}</h4>
-            <p>{torneio.data}</p>
+            <p>{formatarData(torneio.data)}</p>
           </div>
           <div className={style.container_botoes_torneio}>
             <button>Entrar no Torneio</button>

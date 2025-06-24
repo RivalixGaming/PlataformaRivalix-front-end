@@ -20,7 +20,15 @@ export default function CardTorneio({
   const porcent = ((total - restante) / total) * 100;
 
 
-  const imagemSrc = foto || Padrao; 
+  const imagemSrc = foto || Padrao;
+
+  function formatarData(dataString) {
+    if (!dataString || typeof dataString !== 'string') return 'Data inválida';
+    const partes = dataString.split('-');
+    if (partes.length !== 3) return dataString;
+    const [ano, mes, dia] = partes;
+    return `${dia}/${mes}/${ano}`;
+  }
 
   return (
     <Link key={id} to={`/torneios/${id}`} className="container_card_perfil">
@@ -36,7 +44,7 @@ export default function CardTorneio({
       <div className="categorias">
         <p>{modalidade}</p>
         <p>{tipo}</p>
-        <p>{data}</p>
+        <p>{formatarData(data)}</p>
       </div>
 
       <div className="infos_extras">
