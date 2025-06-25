@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-//import torneios from "../../data/torneios"; // 1 : Removendo a importação do arquivo estático
 import NavBarHome from "../../Components/HomeNavBar/NavBarHome";
 import style from "./DetalhesTorneio.module.css";
 
@@ -11,28 +10,21 @@ import Participantes from "../../Components/TorneioParticipantes/TorneioParticip
 
 export default function DetalhesTorneio() {
   const params = useParams();
-  // 32 : Coloca um torneio em um estado para que ele possa ser atualizado 
+  // Coloca um torneio em um estado para que ele possa ser atualizado 
   const [torneio, setTorneio] = useState(null);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [abaAtiva, setAbaAtiva] = useState("VisaoGeral");
 
-  // 33 : Criando a função que sabe como encontrar e definir o torneio
+  // Criando a função que sabe como encontrar e definir o torneio
   const fetchTorneioData = () => {
     const todosOsTorneios = JSON.parse(localStorage.getItem('torneiosRivalix') || '[]');
     const torneioEncontrado = todosOsTorneios.find((t) => t.id === parseInt(params.id));
     setTorneio(torneioEncontrado); // Usamos a função do estado para atualizar
   };
 
-  // 34 : Usando o useEffect para carregar os dados quando a página abre 
+  // Usando o useEffect para carregar os dados quando a página abre 
   useEffect(() => {
     fetchTorneioData();
   }, [params.id]); // A lista de dependências garante que isso roda quando o ID do torneio na URL muda.
-
-  // 2 : Lendo a lista de torneios do localStorage
-  //const todosOsTorneios = JSON.parse(localStorage.getItem('torneiosRivalix') || '[]'); 
-
-  // 3 : Encontrando o torneio na lista atualizada
-  //const torneio = todosOsTorneios.find((t) => t.id === parseInt(params.id));
 
   if (!torneio) {
     return <>
@@ -40,14 +32,6 @@ export default function DetalhesTorneio() {
       <p style={{ color: 'white', textAlign: 'center', marginTop: '2rem' }}>Torneio não encontrado ou carregando...</p>
     </>
   }
-
-  function formatarData(dataString) {
-      if (!dataString || typeof dataString !== 'string') return 'Data inválida';
-      const partes = dataString.split('-');
-      if (partes.length !== 3) return dataString;
-      const [ano, mes, dia] = partes;
-      return `${dia}/${mes}/${ano}`;
-    }
 
   return (
     <>
@@ -61,7 +45,7 @@ export default function DetalhesTorneio() {
         <div className={style.container_botao_data}>
           <div className={style.container_data}>
             <h4>{torneio.titulo}</h4>
-            <p>{formatarData(torneio.data)}</p>
+            <p>{torneio.data}</p>
           </div>
           <div className={style.container_botoes_torneio}>
             <button>Entrar no Torneio</button>
@@ -103,7 +87,7 @@ export default function DetalhesTorneio() {
 
         <div className={style.linha_separacao}></div>
 
-        {/* 4 : Passando o objeto torneio completo como props */}
+        {/* Passando o objeto torneio completo como props */}
         <div>
           {abaAtiva === "VisaoGeral" && <VisaoGeral torneio={torneio} />}
           {abaAtiva === "Chave" && <Chave torneio={torneio} />}

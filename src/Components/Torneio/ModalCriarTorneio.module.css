@@ -193,15 +193,14 @@ button[disabled] {
   border: 1px solid #ccc;
 }
 
-/*24 : Adicionando a estilização do campo de inserção de participantes */
-.participantSection { margin-top: 1rem; }
-.participantSection h4 { margin-bottom: 0.5rem; }
-.participantInputWrapper { display: flex; gap: 0.5rem; }
-.participantInputWrapper input { flex-grow: 1; }
-.participantList { list-style: none; padding: 0; margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.participantList li { background-color: #eee; padding: 5px 10px; border-radius: 15px; font-size: 0.9em; display: flex; align-items: center; gap: 5px; }
-.participantList li button { all: unset; cursor: pointer; color: red; font-weight: bold; }
-.dark .participantList li { background-color: #3e3e52; }
+.participanteSection { margin-top: 1rem; }
+.participanteSection h4 { margin-bottom: 0.5rem; }
+.participanteInputWrapper { display: flex; gap: 0.5rem; }
+.participanteInputWrapper input { flex-grow: 1; }
+.participanteList { list-style: none; padding: 0; margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.participanteList li { background-color: #eee; padding: 5px 10px; border-radius: 15px; font-size: 0.9em; display: flex; align-items: center; gap: 5px; }
+.participanteList li button { all: unset; cursor: pointer; color: red; font-weight: bold; }
+.dark .participanteList li { background-color: #3e3e52; }
 
 @media (max-width: 600px) {
   .endereco {

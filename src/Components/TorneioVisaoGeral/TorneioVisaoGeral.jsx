@@ -1,24 +1,12 @@
-// import torneios from "../../data/torneios"; // Removendo import de arquivo estático
 import style from "./TorneioVisaoGeral.module.css"
 
 
 export default function TorneioVisaoGeral({torneio}) {
 
-    // const torn = torneios[torneio-1] 5 : Removendo lógica de busca de torneios
-
-    if(!torneio){ // 7 : Se o torneio não for passado não tenta renderizar nada
+    if(!torneio){ 
         return <p>Carregando detalhes do torneio</p>
     }
-    
-    function formatarData(dataString) {
-      if (!dataString || typeof dataString !== 'string') return 'Data inválida';
-      const partes = dataString.split('-');
-      if (partes.length !== 3) return dataString;
-      const [ano, mes, dia] = partes;
-      return `${dia}/${mes}/${ano}`;
-    }
 
-    // 8 : Trocando todos os torn. por torneio.
     return(
         <>
             <div className={style.container_todo_detalhe_torneio}>
@@ -43,7 +31,7 @@ export default function TorneioVisaoGeral({torneio}) {
                     </div>
                     <div>
                         <h4>Inicio</h4>
-                        <p>{formatarData(torneio.data)}</p>
+                        <p>{torneio.data}</p>
                         <p>{torneio.hora}</p>
                     </div>
                     <div>

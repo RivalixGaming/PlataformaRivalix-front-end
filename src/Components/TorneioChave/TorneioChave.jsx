@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import style from './TorneioChave.module.css';
 import MatchModal from '../Torneio/MatchModal';
-import ModalResetBracket from '../Torneio/ModalResetBracket'; // 28 : Importando o novo modal de reset de bracket
+import ModalResetBracket from '../Torneio/ModalResetBracket';
 
 // Lista de jogadores padrão (fallback)
 const playerNames = [
@@ -14,7 +14,6 @@ const playerNames = [
 // Função para gerar a estrutura da bracket a partir de uma lista de jogadores 
 function generateBracket(players) {
 
-    // 25 : Caso não houver participantes, ele retorna uma chave vazia e utiliza a lista de jogadores padrão na condicional do TorneioChave()
     if (!players || players.length === 0) {
         return [{ title: 'Quartas de Final', matches: [] }];
     }
@@ -38,7 +37,7 @@ function generateBracket(players) {
     return initialRounds;
 }
 
-// 26 : Utilizando os dados do torneio que foi criado para gerar a bracket
+//  Utilizando os dados do torneio que foi criado para gerar a bracket
 export default function TorneioChave({ torneio, onBracketReset }) {
 
     const [rounds, setRounds] = useState(() => {
@@ -54,23 +53,8 @@ export default function TorneioChave({ torneio, onBracketReset }) {
     });
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedMatch, setSelectedMatch] = useState(null);
-    // 29 : Adicionando um novo estado ao modal de reset 
+    
     const [isResetModalOpen, setIsResetModalOpen] = useState(false); 
-
-    // 35 : Usando useEffect para inicializar a bracket
-    /*useEffect(() => {
-        const savedBracket = localStorage.getItem(`rivalixBracket_${torneio.id}`); // Usando ` ao invés de ' para template 
-        if (savedBracket) {
-            return JSON.parse(savedBracket);
-        }
-
-        // 27 : Lógica que verifica se a lista de participantes está vazia, se sim usa a lista padrão, se não, usa a lista do torneio
-        const players = (torneio.participants && torneio.participants.length > 0)
-            ? torneio.participants  // Se sim, usa a lista do torneio
-            : playerNames;          // Se não, usa a lista padrão
-
-        return generateBracket(players);
-    }, [torneio]);*/
 
     useEffect(() => {
         localStorage.setItem(`rivalixBracket_${torneio.id}`, JSON.stringify(rounds));
@@ -106,13 +90,12 @@ export default function TorneioChave({ torneio, onBracketReset }) {
         handleCloseModal();
     };
 
-    // 30 : Modificando a função handleReset para o novo modal 
     const handleReset = () => {
         // Abrindo o novo modal
         setIsResetModalOpen(true);
     };
 
-    // 31 : Cria uma nova função para quando o modal de reset for confirmado
+    // Cria uma nova função para quando o modal de reset for confirmado
     const handleConfirmReset = (newPlayers) => {
         // Atualiza o objeto do torneio no localStorage geral com os novos participantes
         const todosOsTorneios = JSON.parse(localStorage.getItem('torneiosRivalix') || '[]');

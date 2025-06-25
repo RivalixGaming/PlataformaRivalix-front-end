@@ -20,19 +20,19 @@ export default function ModalCriarTorneio({ aberto, fechar, salvarTorneio }) {
   const [imagemBase, setImagemBase] = useState("");
 
   // 21 : Adicionando a lista de participantes ao torneio
-  const [participants, setParticipants] = useState([]); // Array para a lista de nomes
-  const [currentParticipant, setCurrentParticipant] = useState(""); // Valor do input atual
+  const [participantes, setParticipantes] = useState([]); // Array para a lista de nomes
+  const [currentParticipante, setCurrentParticipante] = useState(""); // Valor do input atual
 
   const handleAddParticipant = () => {
     // Adiciona o participante apenas se o campo não estiver vazio e a lista tiver menos de 8 jogadores
-    if (currentParticipant.trim() && participants.length < 8) {
-      setParticipants([...participants, currentParticipant.trim()]);
-      setCurrentParticipant(""); // Limpa o input
+    if (currentParticipant.trim() && participante.length < 8) {
+      setParticipantes([...participantes, currentParticipante.trim()]);
+      setCurrentParticipante(""); // Limpa o input
     }
   };
 
-  const handleRemoveParticipant = (indexToRemove) => {
-    setParticipants(participants.filter((_, index) => index !== indexToRemove));
+  const handleRemoveParticipante = (indexToRemove) => {
+    setParticipantes(participantes.filter((_, index) => index !== indexToRemove));
   };
 
   // 10 : Adicionando hora e formato como estados que estavam faltando
@@ -58,7 +58,6 @@ export default function ModalCriarTorneio({ aberto, fechar, salvarTorneio }) {
     jogo.trim() &&
     data.trim() &&
     descricao.trim() &&
-    Number(vagas) > 0 &&
     modalidade.trim() &&
     tipo.trim() &&
     enderecoValido &&
@@ -98,9 +97,7 @@ export default function ModalCriarTorneio({ aberto, fechar, salvarTorneio }) {
       premioTotal: parseFloat(premio) || 0, // 15 : Corrigindo premio por premio total
       descricao,
       imgTorneio: Padrao, // 16 : Usando a imagem base como padrão para salvar
-      totalVagas: parseInt(vagas), // 13 : Adicionando totalVagagas e vagasRestantes no objeto
-      participants: participants, // 23 : Adicionando os participantes dentro do objeto novoTorneio
-      vagasRestantes: parseInt(vagas),
+      participantes: participantes, // 23 : Adicionando os participantes dentro do objeto novoTorneio
     };
 
     salvarTorneio(novoTorneio);
@@ -162,8 +159,6 @@ export default function ModalCriarTorneio({ aberto, fechar, salvarTorneio }) {
               <input type="text" placeholder="CEP" value={cep} onChange={(e) => setCep(e.target.value)} required />
             </div>
           )}
-
-          <input type="number" placeholder="Vagas totais" value={vagas} onChange={(e) => setVagas(e.target.value)} required />
           <input type="text" placeholder="Valor de Entrada" value={valorEntrada} onChange={(e) => setValorEntrada(e.target.value)} />
           <input type="text" placeholder="Prêmio" value={premio} onChange={(e) => setPremio(e.target.value)} />
 
@@ -172,26 +167,26 @@ export default function ModalCriarTorneio({ aberto, fechar, salvarTorneio }) {
             <img src={imagemBase} alt="Prévia" style={{ width: "100%", borderRadius: "8px", marginTop: "0.5rem" }} />
           )}
 
-          ${/*22 : Adicionando a inserção de participantes no formulário*/}
+          {/*22 : Adicionando a inserção de participantes no formulário*/}
           <div className={styles.participantSection}>
-            <h4>Participantes ({participants.length}/8)</h4>
+            <h4>Participantes ({participantes.length}/8)</h4>
             <div className={styles.participantInputWrapper}>
               <input
                 type="text"
                 placeholder="Nome do participante"
-                value={currentParticipant}
+                value={currentParticipante}
                 onChange={(e) => setCurrentParticipant(e.target.value)}
                 // Impede de adicionar mais de 8
-                disabled={participants.length >= 8}
+                disabled={participantes.length >= 8}
               />
-              <button type="button" onClick={handleAddParticipant} disabled={participants.length >= 8}>
+              <button type="button" onClick={handleAddParticipant} disabled={participantes.length >= 8}>
                 Adicionar
               </button>
             </div>
             <ul className={styles.participantList}>
-              {participants.map((participant, index) => (
+              {participante.map((participante, index) => (
                 <li key={index}>
-                  {participant}
+                  {participante}
                   <button type="button" onClick={() => handleRemoveParticipant(index)}>X</button>
                 </li>
               ))}
